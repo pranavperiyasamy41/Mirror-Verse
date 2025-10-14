@@ -8,25 +8,34 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>Mirror Match</h1>
-        <div class="score-board">
-            <div class="score">Score: <span id="score">0</span></div>
-            <div class="high-score">High Score: <span id="high-score">0</span></div>
-        </div>
-        <div class="number-display" id="number-display"></div>
-        <div class="timer-container">
-            <div class="timer-bar" id="timer-bar">
-                <div class="timer-fill" id="timer-fill"></div>
+        <div class="game-content">
+            <h1>Mirror Match</h1>
+            <div class="score-board">
+                <div class="score">Score: <span id="score">0</span></div>
+                <div class="high-score">High Score: <span id="high-score">0</span></div>
+            </div>
+            <div class="number-display" id="number-display"></div>
+            <div class="timer-container">
+                <div class="timer-bar" id="timer-bar">
+                    <div class="timer-fill" id="timer-fill"></div>
+                </div>
+            </div>
+            <input type="text" id="user-input" placeholder="Enter the mirrored number" disabled>
+            <div class="controls">
+                <button id="start-btn">Start Game</button>
+                <button id="submit-btn" disabled>Submit</button>
+            </div>
+            <div class="message" id="message"></div>
+            <div class="lives">
+                Lives: <span id="lives">3</span>
             </div>
         </div>
-        <input type="text" id="user-input" placeholder="Enter the mirrored number" disabled>
-        <div class="controls">
-            <button id="start-btn">Start Game</button>
-            <button id="submit-btn" disabled>Submit</button>
-        </div>
-        <div class="message" id="message"></div>
-        <div class="lives">
-            Lives: <span id="lives">3</span>
+        <div class="bonus-meter-container">
+            <div class="bonus-meter-label">Bonus Meter</div>
+            <div class="bonus-meter" id="bonus-meter">
+                <div class="bonus-meter-fill" id="bonus-meter-fill"></div>
+            </div>
+            <div class="bonus-meter-percent" id="bonus-meter-percent">0%</div>
         </div>
     </div>
     <script src="script.js"></script>
