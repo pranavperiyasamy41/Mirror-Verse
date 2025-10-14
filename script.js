@@ -8,6 +8,8 @@ let displayTime = 2000; // Initial display time in milliseconds
 let digitCount = 3; // Initial number of digits
 let timerInterval;
 let timeLeft = 10; // 10 seconds timer
+let startTime; // Time when number disappears
+let bonusMeterPercent = 0; // Bonus meter percentage
 
 // DOM Elements
 const numberDisplay = document.getElementById('number-display');
@@ -19,6 +21,8 @@ const highScoreElement = document.getElementById('high-score');
 const messageElement = document.getElementById('message');
 const livesElement = document.getElementById('lives');
 const timerBar = document.getElementById('timer-fill');
+const bonusMeterFill = document.getElementById('bonus-meter-fill');
+const bonusMeterPercentElement = document.getElementById('bonus-meter-percent');
 
 // Load high score from localStorage
 function loadHighScore() {
@@ -56,6 +60,12 @@ function updateTimer() {
     timerBar.style.transform = `scaleX(${percentage / 100})`;
 }
 
+// Update bonus meter display
+function updateBonusMeter() {
+    bonusMeterFill.style.transform = `scaleY(${bonusMeterPercent / 100})`;
+    bonusMeterPercentElement.textContent = `${Math.round(bonusMeterPercent)}%`;
+}
+
 // Display number with animation
 function displayNumber(number) {
     numberDisplay.textContent = number;
@@ -84,6 +94,9 @@ function displayNumber(number) {
             userInput.disabled = false;
             userInput.focus();
             submitBtn.disabled = false;
+            
+            // Record start time for bonus calculation
+            startTime = new Date();
             
             // Start the 10-second answering timer AFTER number disappears
             startAnsweringTimer();
@@ -169,6 +182,12 @@ function checkAnswer() {
             if (displayTime > 500) displayTime -= 100;
         }
         
+        // Calculate bonus based on response time
+        const endTime = new Date();
+        const responseTime = (endTime - startTime) / 1000; // Convert to seconds
+        const bonus = calculateBonus(responseTime);
+        addBonusToMeter(bonus);
+        
         // Start next round after delay
         setTimeout(() => {
             startRound();
@@ -208,6 +227,36 @@ function gameOver() {
     displayTime = 2000;
 }
 
+// Calculate bonus based on response time
+function calculateBonus(responseTime) {
+    if (responseTime <= 1) {
+        return 30; // 30% for <= 1 second
+    } else if (responseTime <= 3) {
+        return 25; // 25% for 2-3 seconds
+    } else if (responseTime <= 5) {
+        return 20; // 20% for 4-5 seconds
+    } else {
+        return 10; // 10% for 6-10 seconds
+    }
+}
+
+// Add bonus to meter and check if player should receive a life
+function addBonusToMeter(bonus) {
+    bonusMeterPercent += bonus;
+    
+    // Check if bonus meter is full
+    if (bonusMeterPercent >= 100) {
+        // Award extra life
+        lives++;
+        livesElement.textContent = lives;
+        bonusMeterPercent = 0; // Reset meter
+        messageElement.textContent = 'Bonus! Extra life awarded!';
+        messageElement.className = 'message correct';
+    }
+    
+    updateBonusMeter();
+}
+
 // Start the game
 function startGame() {
     if (gameActive) return;
@@ -217,6 +266,8 @@ function startGame() {
     lives = 3;
     digitCount = 3;
     displayTime = 2000;
+    bonusMeterPercent = 0; // Reset bonus meter
+    updateBonusMeter(); // Update display
     
     // Update UI
     scoreElement.textContent = score;
