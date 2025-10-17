@@ -127,8 +127,15 @@ function startAnsweringTimer() {
 function timeUp() {
     lives--;
     livesElement.textContent = lives;
-    messageElement.textContent = `Time's up! The mirror of ${currentNumber} is ${reverseNumber(currentNumber)}`;
-    messageElement.className = 'message wrong';
+    
+    // Add wrong answer animation to the game container
+    const gameContainer = document.querySelector('.game-container');
+    gameContainer.style.animation = 'wrong 0.5s';
+    
+    // Remove animation after it completes
+    setTimeout(() => {
+        gameContainer.style.animation = '';
+    }, 500);
     
     // Start next round after delay
     setTimeout(() => {
@@ -173,8 +180,15 @@ function checkAnswer() {
         // Correct answer
         score++;
         scoreElement.textContent = score;
-        messageElement.textContent = 'Correct!';
-        messageElement.className = 'message correct';
+        
+        // Add celebration animation to the game container
+        const gameContainer = document.querySelector('.game-container');
+        gameContainer.style.animation = 'celebrate 0.5s';
+        
+        // Remove animation after it completes
+        setTimeout(() => {
+            gameContainer.style.animation = '';
+        }, 500);
         
         // Increase difficulty every 3 correct answers
         if (score % 3 === 0) {
@@ -196,8 +210,15 @@ function checkAnswer() {
         // Wrong answer
         lives--;
         livesElement.textContent = lives;
-        messageElement.textContent = `Wrong! The mirror of ${currentNumber} is ${correctAnswer}`;
-        messageElement.className = 'message wrong';
+        
+        // Add wrong answer animation to the game container
+        const gameContainer = document.querySelector('.game-container');
+        gameContainer.style.animation = 'wrong 0.5s';
+        
+        // Remove animation after it completes
+        setTimeout(() => {
+            gameContainer.style.animation = '';
+        }, 500);
         
         // Start next round after delay
         setTimeout(() => {
@@ -217,10 +238,31 @@ function gameOver() {
     // Stop timer
     clearInterval(timerInterval);
     
-    messageElement.textContent = `Game Over! Your score: ${score}`;
-    messageElement.className = 'message wrong';
+    // Hide game content and show game over screen
+    document.querySelector('.game-content').style.display = 'none';
+    document.querySelector('.bonus-meter-container').style.display = 'none';
     
-    saveHighScore();
+    // Show game over screen
+    const gameOverScreen = document.getElementById('game-over');
+    gameOverScreen.style.display = 'flex';
+    
+    // Set final score
+    document.getElementById('final-score').textContent = score;
+    
+    // Check if this is a high score
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('mirrorMatchHighScore', highScore.toString());
+        highScoreElement.textContent = highScore;
+        document.getElementById('high-score-message').textContent = 'New High Score!';
+        document.getElementById('high-score-message').classList.add('highlight');
+    } else {
+        document.getElementById('high-score-message').textContent = `High Score: ${highScore}`;
+        document.getElementById('high-score-message').classList.remove('highlight');
+    }
+    
+    // Add event listener to play again button
+    document.getElementById('play-again-btn').addEventListener('click', startGame);
     
     // Reset game state
     digitCount = 3;
@@ -250,8 +292,15 @@ function addBonusToMeter(bonus) {
         lives++;
         livesElement.textContent = lives;
         bonusMeterPercent = 0; // Reset meter
-        messageElement.textContent = 'Bonus! Extra life awarded!';
-        messageElement.className = 'message correct';
+        
+        // Add celebration animation for bonus life
+        const gameContainer = document.querySelector('.game-container');
+        gameContainer.style.animation = 'celebrate 0.5s';
+        
+        // Remove animation after it completes
+        setTimeout(() => {
+            gameContainer.style.animation = '';
+        }, 500);
     }
     
     updateBonusMeter();
@@ -260,6 +309,11 @@ function addBonusToMeter(bonus) {
 // Start the game
 function startGame() {
     if (gameActive) return;
+    
+    // Hide game over screen if visible
+    document.getElementById('game-over').style.display = 'none';
+    document.querySelector('.game-content').style.display = 'block';
+    document.querySelector('.bonus-meter-container').style.display = 'flex';
     
     // Reset game state
     score = 0;
