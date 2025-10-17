@@ -24,11 +24,11 @@
             <div class="controls">
                 <button id="start-btn">Start Game</button>
                 <button id="submit-btn" disabled>Submit</button>
+                <div class="lives">
+                    Lives: <span id="lives">3</span>
+                </div>
             </div>
             <div class="message" id="message"></div>
-            <div class="lives">
-                Lives: <span id="lives">3</span>
-            </div>
         </div>
         <div class="bonus-meter-container">
             <div class="bonus-meter-label">Bonus Meter</div>
@@ -36,6 +36,12 @@
                 <div class="bonus-meter-fill" id="bonus-meter-fill"></div>
             </div>
             <div class="bonus-meter-percent" id="bonus-meter-percent">0%</div>
+        </div>
+        <div class="game-over" id="game-over" style="display: none;">
+            <h2>Game Over</h2>
+            <p>Your Score: <span id="final-score">0</span></p>
+            <p id="high-score-message"></p>
+            <button id="play-again-btn">Play Again</button>
         </div>
     </div>
     <script src="script.js"></script>
