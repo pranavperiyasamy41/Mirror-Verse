@@ -28,15 +28,13 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 15px; /* Add gap between game content and bonus meter */
 }
 
 .game-content {
     flex: 1;
     text-align: center;
-}
-
-.game-content {
-    text-align: center;
+    margin-left: 30px;
 }
 
 h1 {
@@ -63,8 +61,9 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60px;
+    width: 70px; /* Increased by 10px to accommodate wider meter */
     height: 300px;
+    transform: translateY(-25px);
 }
 
 .bonus-meter-label {
@@ -76,7 +75,7 @@ h1 {
 }
 
 .bonus-meter {
-    width: 40px;
+    width: 40px; /* Increased by 10px */
     height: 100%;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -168,6 +167,9 @@ h1 {
     display: flex;
     gap: 15px;
     margin-bottom: 20px;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
 }
 
 button {
@@ -222,7 +224,76 @@ button:disabled {
 .lives {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 30px; /* Positioned 10px below buttons */
+}
+
+/* Game Over Display */
+.game-over {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(26, 26, 46, 0.9);
+    z-index: 10;
+    padding: 30px;
+    border-radius: 25px;
+    border: 5px solid #4ecdc4;
+    box-shadow: 0 0 25px rgba(78, 205, 196, 0.6);
+}
+
+.game-over h2 {
+    font-size: 3rem; /* Increased font size */
+    margin-bottom: 30px; /* Increased margin */
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.game-over p {
+    font-size: 2rem; /* Increased font size */
+    margin-bottom: 20px; /* Increased margin */
+    color: #fff;
+}
+
+.game-over #high-score-message {
+    font-size: 1.5rem; /* Increased font size */
+    font-weight: bold;
+    margin-bottom: 30px; /* Increased margin */
+}
+
+.game-over #high-score-message.highlight {
+    color: #f1c40f;
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+    animation: pulse 1s infinite;
+}
+
+.game-over button {
+    padding: 20px 40px; /* Increased padding */
+    font-size: 1.5rem; /* Increased font size */
+    border: none;
+    border-radius: 15px; /* Increased border radius */
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+}
+
+.game-over button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Animations */
@@ -248,6 +319,34 @@ button:disabled {
     75% { transform: translateX(10px); }
 }
 
+/* Celebration Animation */
+@keyframes celebrate {
+    0% { transform: scale(1); opacity: 1; }
+    25% { transform: scale(1.2); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 0.6; box-shadow: 0 0 20px #2ecc71; }
+    75% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Wrong Answer Animation */
+@keyframes wrong {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-15px); }
+    40% { transform: translateX(15px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Game Over Animation */
+@keyframes gameOver {
+    0% { transform: scale(1); opacity: 1; }
+    25% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(0.8); opacity: 0.5; }
+    75% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
 /* Mirror Mode */
 .mirror {
     transform: scaleX(-1);
@@ -255,22 +354,240 @@ button:disabled {
 }
 
 /* Responsive Design */
+/* Small devices (mobiles, max-width: 600px) */
 @media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
     .game-container {
-        padding: 20px;
+        padding: 15px;
         width: 95%;
+        flex-direction: row;
+        align-items: center;
+        margin: 10px auto;
+    }
+    
+    .game-content {
+        flex: 1;
+        text-align: center;
     }
     
     h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .score-board {
+        font-size: 1rem;
+        margin-bottom: 15px;
     }
     
     .number-display {
-        font-size: 3rem;
-        min-height: 80px;
+        font-size: 2.5rem;
+        min-height: 70px;
+        margin: 20px 0;
+        padding: 10px;
+    }
+    
+    .timer-container {
+        margin: 10px 0 15px;
+    }
+    
+    #user-input {
+        padding: 12px;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
     }
     
     .controls {
         flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    button {
+        padding: 12px;
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    .lives {
+        font-size: 1rem;
+        margin: 10px 0;
+        position: static;
+        transform: none;
+    }
+    
+    .message {
+        font-size: 1rem;
+        min-height: 25px;
+        margin-bottom: 15px;
+        padding: 8px;
+    }
+    
+    .bonus-meter-container {
+        margin-left: 15px;
+        transform: translateY(-60px); /* Move upward by 20px */
+        width: 30px;
+        height: 250px; /* Increased by 10px */
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .bonus-meter-label {
+        font-size: 0.7rem;
+        writing-mode: vertical-lr;
+        text-orientation: mixed;
+        margin-bottom: 0;
+        position: static;
+        transform: none;
+    }
+    
+    .bonus-meter {
+        width: 30px;
+        height: 100%;
+        margin-bottom: 0;
+    }
+    
+    .bonus-meter-percent {
+        font-size: 0.7rem;
+        writing-mode: vertical-lr;
+        text-orientation: mixed;
+    }
+    
+    .game-over {
+        width: 90%;
+        height: 250px;
+        padding: 20px;
+    }
+
+    .game-over h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .game-over p {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .game-over #high-score-message {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .game-over button {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Medium devices (tablets, 601px - 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .game-container {
+        padding: 25px;
+        width: 90%;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    .game-content {
+        flex: 1;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    .number-display {
+        font-size: 3.5rem;
+        min-height: 90px;
+    }
+    
+    .controls {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .bonus-meter-container {
+        height: 250px;
+        transform: translateY(-20px);
+        width: 35px;
+    }
+    
+    .bonus-meter {
+        width: 35px;
+    }
+    
+    .game-over {
+        width: 450px;
+        height: 280px;
+        padding: 25px;
+    }
+
+    .game-over h2 {
+        font-size: 2.5rem;
+        margin-bottom: 25px;
+    }
+
+    .game-over p {
+        font-size: 1.8rem;
+        margin-bottom: 18px;
+    }
+
+    .game-over #high-score-message {
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+    }
+
+    .game-over button {
+        padding: 18px 35px;
+        font-size: 1.3rem;
+    }
+}
+
+/* Large devices (desktops, 1025px and up) */
+@media (min-width: 1025px) {
+    .game-container {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .controls {
+        flex-direction: row;
+    }
+    
+    .bonus-meter-container {
+        height: 300px;
+        transform: translateY(-35px);
+    }
+    
+    .game-over {
+        width: 500px;
+        height: 300px;
+        padding: 30px;
+    }
+
+    .game-over h2 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+    }
+
+    .game-over p {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .game-over #high-score-message {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    .game-over button {
+        padding: 20px 40px;
+        font-size: 1.5rem;
     }
 }
