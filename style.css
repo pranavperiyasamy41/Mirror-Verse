@@ -582,12 +582,12 @@ button:disabled {
     }
 
     .game-over #high-score-message {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         margin-bottom: 30px;
     }
 
     .game-over button {
         padding: 20px 40px;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 }
