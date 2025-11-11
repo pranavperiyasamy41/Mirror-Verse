@@ -4,7 +4,7 @@ let highScore = 0;
 let lives = 3;
 let currentNumber = '';
 let gameActive = false;
-let displayTime = 2000; // Initial display time in milliseconds
+let displayTime = 2000; // Initial display time in Milliseconds
 let digitCount = 3; // Initial number of digits
 let timerInterval;
 let timeLeft = 10; // 10 seconds timer
@@ -202,7 +202,7 @@ function checkAnswer() {
         const bonus = calculateBonus(responseTime);
         addBonusToMeter(bonus);
         
-        // Start next round after delay
+        // Start next round after Delay
         setTimeout(() => {
             startRound();
         }, 1500);
