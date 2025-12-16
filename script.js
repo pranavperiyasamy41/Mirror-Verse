@@ -4,7 +4,7 @@ let highScore = 0;
 let lives = 3;
 let currentNumber = '';
 let gameActive = false;
-let displayTime = 2000; // Initial display time in Milliseconds
+let displayTime = 2000; 
 let digitCount = 3; // Initial number of digits
 let timerInterval;
 let timeLeft = 10; // 10 seconds timer
