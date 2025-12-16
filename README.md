@@ -1,37 +1,41 @@
-🪞 MirrorVerse – Puzzle Game
+# 🪞 MirrorVerse
+### A Logic-Based Puzzle Game
 
-MirrorVerse is an interactive logic-based puzzle game where players solve challenges using mirror mechanics across dynamically increasing difficulty levels. The game focuses on problem-solving, visual feedback, and an engaging user experience.
+MirrorVerse is an interactive puzzle game where players solve challenges using **mirror-based mechanics**.  
+The game focuses on **logical thinking, progressive difficulty, and smooth visual feedback** to deliver an engaging experience.
 
-🚀 Features
+---
 
-🧩 Puzzle-based Gameplay – Solve logical challenges using mirror mechanics
+## ✨ Features
 
-🎮 Multiple Levels – Progressive difficulty to keep players engaged
+- 🧩 Mirror-based logical puzzles  
+- 🎮 Multiple levels with increasing difficulty  
+- ✨ Smooth animations and transitions  
+- 📊 Score tracking system  
+- 🔊 Sound and visual feedback  
+- 📱 Responsive design  
 
-✨ Smooth Animations – Visual transitions and effects for better immersion
+---
 
-📈 Score Tracking – Player performance is tracked across levels
+## 🛠️ Tech Stack
 
-🔊 Sound Effects – Audio feedback for actions and game events
+| Technology | Usage |
+|-----------|------|
+| HTML5 | Game structure |
+| CSS3 | Styling & animations |
+| JavaScript (ES6) | Game logic |
 
-📱 Responsive Design – Works across different screen sizes
+---
 
-🛠️ Tech Stack
+## 🎯 How to Play
 
-HTML5 – Game structure
+1. Launch the game from the home screen  
+2. Observe mirror placements and puzzle layout  
+3. Interact with objects to solve the puzzle  
+4. Complete the level to unlock the next challenge  
+5. Try to finish with the best score  
 
-CSS3 – Styling, layout, and animations
+---
 
-JavaScript (ES6) – Game logic and interactions
+## 📂 Project Structure
 
-🎯 How to Play
-
-Start the game from the main screen
-
-Analyze the puzzle and mirror placements
-
-Interact with the elements to solve the challenge
-
-Complete the level to unlock the next one
-
-Aim for higher scores by solving puzzles efficiently
