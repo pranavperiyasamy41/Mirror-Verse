@@ -37,5 +37,3 @@ The game focuses on **logical thinking, progressive difficulty, and smooth visua
 
 ---
 
-## 📂 Project Structure
-
